@@ -3,7 +3,7 @@
 import AppTable from "../components/table";
 import {useEffect, useState} from "react";
 
-const Facebook = () => {
+const Blog = () => {
     const [articles, setArticles] = useState(null);
 
     const addArticle = (article) => {
@@ -32,4 +32,4 @@ const Facebook = () => {
     )
 }
 
-export default Facebook;
+export default Blog;

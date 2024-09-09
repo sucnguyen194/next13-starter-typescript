@@ -1,6 +1,11 @@
 import Link from "next/link";
 import './styles/app.css';
 
+export const metadata = {
+    title: 'Trang chủ | Học React JS',
+    description: 'Học khó vc'
+}
+
 export default function Home() {
   return (
       <div>
