@@ -3,8 +3,9 @@ import Table from 'react-bootstrap/Table';
 import Button from "react-bootstrap/cjs/Button";
 import UpdateModal from "./update.modal";
 import CreateModal from "./create.modal";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Link from "next/link";
+import {toast} from "react-toastify";
 
 interface Props {
     articles: ArticleD[];
@@ -16,6 +17,25 @@ const AppTable = (props: Props) => {
     const [article, setArticle] = useState(null);
     const [showModalCreate, setShowModalCreate] = useState(false);
     const [showModalUpdate, setShowModalUpdate] = useState(false);
+
+
+    const handleDelete = async (id: number) => {
+        if (confirm('Chắc muốn xoá không?') === true) {
+            const response = await fetch(`http://localhost:8000/blogs/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+
+            if (response.ok) {
+
+                toast.success('Blog deleted successfully!');
+            } else {
+                toast.error('Failed to add the blog');
+            }
+        }
+    }
 
     return (
         <>
@@ -47,7 +67,7 @@ const AppTable = (props: Props) => {
                                             setArticle(item)
                                         }}
                                 >Edit</Button>
-                                <Button variant='danger'>Delete</Button>
+                                <Button variant='danger' onClick={() => handleDelete(item?.id)}>Delete</Button>
                             </td>
                         </tr>
                     )
